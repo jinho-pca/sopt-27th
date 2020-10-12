@@ -217,37 +217,65 @@ const member = [
     }
 ];
 
-let YB = [member.filter(item => item.status === 'YB')];
-let OB = [member.filter(item => item.status === 'OB')];
+// YB : 21명, OB : 15명 이므로 YB7명과 OB5명을 합쳐 팀당 12명의 팀 3개를 만들려고 한다.
+let team1 = [], team2 = [], team3 = [];
+let YBarr = member.filter(item => item.status === 'YB');
+let OBarr = member.filter(item => item.status === 'OB');
 
-let tmp = [];
+let YB = [];
 let n = getRandomInt(22,100) % 21;
-for(let i = 0; i < 7; i++){
-    tmp[i] = n;
+for(let i = 0; i < 21; i++){
+    YB[i] = n;
     n = getRandomInt(22,100) % 21;
     for(let j = 0; j < i; j++){
-        if(tmp[j] === tmp[i]){
+        if(YB[j] === YB[i]){
             i = i - 1;
             break;
         }
     }
 }
-console.log(tmp);
+for(let i = 0; i < 21; i++){
+    if(i >= 0 && i < 7){
+        team1[i] = YBarr[YB[i]];
+    }
+    else if(i >= 7 && i < 14){
+        team2[i-7] = YBarr[YB[i]];
+    }
+    else if(i >= 14 && i < 21){
+        team3[i-14] = YBarr[YB[i]];
+    }
+}
 
+let OB = [];
+let m = getRandomInt(16,100) % 15;
+for(let i = 0; i < 15; i++){
+    OB[i] = m;
+    m = getRandomInt(16,100) % 15;
+    for(let j = 0; j < i; j++){
+        if(OB[j] === OB[i]){
+            i = i - 1;
+            break;
+        }
+    }
+}
+for(let i = 0; i < 15; i++){
+    if(i >= 0 && i < 5){
+        team1[i+7] = OBarr[OB[i]];
+    }
+    else if(i >= 5 && i < 10){
+        team2[i+2] = OBarr[OB[i]];
+    }
+    else if(i >= 10 && i < 15){
+        team3[i-3] = OBarr[OB[i]];
+    }
+}
 
-
-//   // OB : 15, YB : 21
-// console.log(member.length);
-// console.log(member.filter(item => item.status === 'OB').length);
-
-// function makeTeam(member){
-
-// }
+console.log('1조 : ', team1);
+console.log('2조 : ', team2);
+console.log('3조 : ', team3);
 
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
 }
-
-// let YBnumber = getRandomInt();
