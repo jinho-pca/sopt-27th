@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const fs = require('fs');
 
 const pw = '96695412';
-const fileName = 'CryptedPW';
+const fileName = 'cryptedPW';
 
 crypto.randomBytes(64, (err, buf) => {
   const salt = buf.toString('base64');
