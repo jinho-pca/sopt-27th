@@ -21,8 +21,8 @@ module.exports = {
       const user = await User.create({
         email,
         password: hashedPassword,
-        userName,
         salt,
+        userName,
       });
       return user;
     } catch (err) {
