@@ -38,7 +38,7 @@ module.exports = {
       return res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.SIGN_UP_FAIL));
     }
   },
-  login: async (req, res) => {
+  signin: async (req, res) => {
     const {
       email,
       password
@@ -60,7 +60,7 @@ module.exports = {
         salt,
         password: hashedPassword
       } = alreadyEmail;
-      const user = await userService.login(email, password, salt);
+      const user = await userService.signin(email, password, salt);
 
       if (!user) {
         console.log('비밀번호가 일치하지 않습니다.');
